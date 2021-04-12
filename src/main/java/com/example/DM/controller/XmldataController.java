@@ -1,15 +1,11 @@
 package com.example.DM.controller;
 
-import antlr.StringUtils;
-import com.example.DM.bean.Xmldata;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
+import java.io.*;
+import org.json.*;
 
-//import org.json.*;
-
-import javax.json.Json;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -23,11 +19,8 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.StringReader;
 import java.net.URISyntaxException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 import static com.sun.xml.bind.WhiteSpaceProcessor.replace;
@@ -54,14 +47,14 @@ public class XmldataController {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data1 = myReader.nextLine();
-                System.out.println(data1);
+//                System.out.println(data1);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        System.out.println(xml_data);
+//        System.out.println(xml_data);
         try {
 //          InputSource is = new InputSource(new StringReader(xml_data));
 //            try(PrintWriter out = new PrintWriter("input.txt")) {
@@ -102,10 +95,12 @@ public class XmldataController {
         System.out.println(data);
 
         try {
-            String json = String.valueOf(data.get("allDataSources"));
+//            String json = String.valueOf(data.get("allDataSources"));
+            String json = String.valueOf(data);
             //Convert JSON to XML
-//            String xml = convert(json, "root"); // This method converts json object to xml string
-//            System.out.println(xml);
+            String xml = convert(json, "root"); // This method converts json object to xml string
+            System.out.println(xml);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -113,5 +108,11 @@ public class XmldataController {
 
         return Response.ok().entity(data).build();
 
+    }
+
+    public static String convert(String json, String root) throws JSONException {
+        JSONObject jsonObject = new JSONObject(json);
+        String xml = "<?xml version=\"1.0\" encoding=\"ISO-8859-15\"?>\n<"+root+">" + XML.toString(jsonObject) + "</"+root+">";
+        return xml;
     }
 }
