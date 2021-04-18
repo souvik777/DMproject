@@ -5,6 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import java.io.*;
 import org.json.*;
+//import org.json.simple.*;
 
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
@@ -20,7 +21,9 @@ import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.sun.xml.bind.WhiteSpaceProcessor.replace;
@@ -71,11 +74,12 @@ public class XmldataController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println(uniqueElements);
+        List<String> allElements = new ArrayList<String>(uniqueElements.keySet());
+//        String allElements = JSONArray.toJSONString(list);
+        System.out.println(allElements);
         //if(courseslist.size()!=0)
 //        {
-           return Response.ok().entity(data).build();
+           return Response.ok().entity(allElements).build();
 //        }
         //else{
           //  return Response.status(203).build();

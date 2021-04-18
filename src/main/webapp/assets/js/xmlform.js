@@ -18,8 +18,19 @@ login_form.addEventListener('submit', async (e) => {
         })
     });
 
-    let result = await response;
-    // console.log("1");
-    console.log(result);
-    // console.log("2");
+    // let result = await response;
+    let allElements = await response.json(); // read response body and parse as JSON
+    console.log(allElements);
+
+    for(let i=0;i<allElements.length;i++) {
+        let para = document.createElement("P");
+        let drpDown = document.createElement("button");
+        para.innerText = allElements[i];
+        drpDown.setAttribute("id","drpDn");
+        document.body.appendChild(para);
+        document.body.appendChild(drpDown);
+    }
+    var optionValues= [[1,"masking"],[2,"swapping"],[3,"pseudonomyzation"]];
+
+
 });
