@@ -1,5 +1,6 @@
 package com.example.DM.controller;
 
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -46,7 +47,7 @@ public class XmldataController {
         xml_data = xml_data.replaceAll("\\\\", "");
 
         try {
-            File myObj = new File("file:///home/souvik/Desktop/apache-tomcat-9.0.39/bin/input.txt");
+            File myObj = new File("/home/souvik/Desktop/apache-tomcat-9.0.39/bin/input.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data1 = myReader.nextLine();
@@ -59,11 +60,11 @@ public class XmldataController {
         }
 //        System.out.println(xml_data);
         try {
-//          InputSource is = new InputSource(new StringReader(xml_data));
+//          //InputSource is = new InputSource(new StringReader(xml_data));
 //            try(PrintWriter out = new PrintWriter("input.txt")) {
 //                out.println(xml_data);
-//         }
-            final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse("file:///home/souvik/Desktop/apache-tomcat-9.0.39/bin/input.txt");
+//        }
+            final Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse("/home/souvik/Desktop/apache-tomcat-9.0.39/bin/input.txt");
             final XPathExpression xpath = XPathFactory.newInstance().newXPath().compile("//*[count(./*) = 0]");
             final NodeList nodeList = (NodeList) xpath.evaluate(doc, XPathConstants.NODESET);
             for(int i = 0; i < nodeList.getLength(); i++) {
