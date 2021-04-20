@@ -1,6 +1,5 @@
 package com.example.DM.controller;
 
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -60,7 +59,6 @@ public class XmldataController {
         }
 //        System.out.println(xml_data);
         try {
-//          //InputSource is = new InputSource(new StringReader(xml_data));
 //            try(PrintWriter out = new PrintWriter("input.txt")) {
 //                out.println(xml_data);
 //        }
@@ -69,22 +67,16 @@ public class XmldataController {
             final NodeList nodeList = (NodeList) xpath.evaluate(doc, XPathConstants.NODESET);
             for(int i = 0; i < nodeList.getLength(); i++) {
                 final Element el = (Element) nodeList.item(i);
-//            System.out.println(el.getNodeName());
+
                 uniqueElements.put(el.getNodeName(), true);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         List<String> allElements = new ArrayList<String>(uniqueElements.keySet());
-//        String allElements = JSONArray.toJSONString(list);
         System.out.println(allElements);
-        //if(courseslist.size()!=0)
-//        {
-           return Response.ok().entity(allElements).build();
-//        }
-        //else{
-          //  return Response.status(203).build();
-        //}
+
+        return Response.ok().entity(allElements).build();
     }
 
 
